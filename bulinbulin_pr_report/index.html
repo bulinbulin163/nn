@@ -146,12 +146,6 @@
 <h2 id="_1">摘要</h2>
 <p>本文档记录了 <code>bulinbulin163</code> 在 <code>OpenHUTB/nn</code> 仓库中的 11 次已合并 Pull Request。与单点功能开发不同，本次贡献更偏向对既有仿真智能系统进行工程化加固：围绕 CARLA、AirSim、YOLO 规划器、多模态检测器和基础 CNN 训练脚本，持续修复路径、配置、模型加载、异步写盘、日志记录、输入校验和可视化边界处理等问题。</p>
 <p>本轮贡献累计修改 11 个文件，新增 344 行、删除 137 行。整体目标可以概括为一句话：让仓库中的自动驾驶、无人机与神经网络示例在异常配置、脏输入、跨平台路径和仿真资源收尾场景下更稳定、更容易复现，也更适合后续同学继续扩展。</p>
-<div align="center">
-  <img src="assets/bulinbulin_pr_report/contribution_overview.svg" alt="贡献总览图" width="880" />
-  <p>图 1：11 次 PR 覆盖的五类模块与三条重点项目线</p>
-</div>
-
-<hr />
 <h2 id="1">1. 项目背景与立项依据</h2>
 <p><code>OpenHUTB/nn</code> 是面向神经网络教学、仿真实验和智能系统实践的开源仓库，覆盖基础神经网络、CARLA 自动驾驶、AirSim 无人机控制、MuJoCo 机器人仿真等方向。仓库内容丰富，但也意味着不同模块之间依赖复杂：有的模块依赖仿真器，有的模块依赖深度学习框架，有的模块需要实时处理传感器数据，还有的模块需要写入日志、保存图像或加载 checkpoint。</p>
 <p>在这种工程场景中，真正影响使用体验的往往不是“大算法”，而是一些容易被忽略的细节：</p>
@@ -208,8 +202,8 @@
 <h2 id="3">3. 总体技术架构</h2>
 <p>从系统角度看，这 11 个 PR 可以分成三层：底层是基础训练与仿真入口，中层是 CARLA 场景、数据、模型和日志工具，上层是 YOLO 规划器与可视化输出。</p>
 <div align="center">
-  <img src="assets/bulinbulin_pr_report/system_architecture.svg" alt="系统技术架构图" width="900" />
-  <p>图 2：从仿真输入到模型推理、规划决策和可视化输出的工程链路</p>
+  <img src="../assets/bulinbulin_pr_report/system_architecture.svg" alt="系统技术架构图" width="900" />
+  <p>图 1：从仿真输入到模型推理、规划决策和可视化输出的工程链路</p>
 </div>
 
 <p>这条链路中的关键思想是：<strong>不要假设输入永远干净，也不要假设环境永远完整</strong>。因此，多个 PR 都采用了相似的优化策略：</p>
@@ -317,8 +311,8 @@
 <h3 id="54-rgb-lidar">5.4 多模态融合：统一 RGB 与 LiDAR 特征空间</h3>
 <p>PR #5847 是这一组中最接近“模型结构”的改动。原融合逻辑中，RGB 特征为 2048 维，LiDAR 特征为 1024 维，默认 <code>weighted</code> 融合方式无法直接相加。该 PR 为两路特征增加投影层，统一映射到 512 维，再进行融合。</p>
 <div align="center">
-  <img src="assets/bulinbulin_pr_report/fusion_pipeline.svg" alt="多模态融合流程图" width="880" />
-  <p>图 3：RGB 与 LiDAR 特征对齐后的多模态异常检测流程</p>
+  <img src="../assets/bulinbulin_pr_report/fusion_pipeline.svg" alt="多模态融合流程图" width="880" />
+  <p>图 2：RGB 与 LiDAR 特征对齐后的多模态异常检测流程</p>
 </div>
 
 <p>核心改进包括：</p>
