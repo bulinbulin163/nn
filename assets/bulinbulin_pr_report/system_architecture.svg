@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="680" viewBox="0 0 1120 680">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#42657f"/>
+    </marker>
+    <style>
+      .title{font:700 32px "Microsoft YaHei", Arial, sans-serif;fill:#17324d}
+      .layer{font:700 18px "Microsoft YaHei", Arial, sans-serif;fill:#fff}
+      .box{rx:14;fill:#fff;stroke:#d4e0ea;stroke-width:1.4}
+      .h{font:700 20px "Microsoft YaHei", Arial, sans-serif;fill:#17324d}
+      .p{font:400 15px "Microsoft YaHei", Arial, sans-serif;fill:#516174}
+      .arrow{stroke:#42657f;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#8ca4b8;stroke-width:2;fill:none;stroke-dasharray:8 8;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1120" height="680" fill="#f7fbff"/>
+  <text x="50" y="62" class="title">仿真智能系统工程链路</text>
+
+  <rect x="50" y="105" width="1020" height="95" rx="18" fill="#1d4ed8"/>
+  <text x="78" y="140" class="layer">第一层：仿真与数据入口</text>
+  <rect x="95" y="230" width="250" height="110" class="box"/>
+  <text x="120" y="267" class="h">AirSim 安全导航</text>
+  <text x="120" y="296" class="p">摄像头图像获取</text>
+  <text x="120" y="320" class="p">障碍物检测入口修复</text>
+
+  <rect x="435" y="230" width="250" height="110" class="box"/>
+  <text x="460" y="267" class="h">CARLA 场景生成</text>
+  <text x="460" y="296" class="p">行人 / 车辆 actor</text>
+  <text x="460" y="320" class="p">出生点与 controller 兜底</text>
+
+  <rect x="775" y="230" width="250" height="110" class="box"/>
+  <text x="800" y="267" class="h">数据录制与日志</text>
+  <text x="800" y="296" class="p">异步写盘、UTF-8 JSON</text>
+  <text x="800" y="320" class="p">彩色终端对齐</text>
+
+  <rect x="50" y="380" width="1020" height="95" rx="18" fill="#0f766e"/>
+  <text x="78" y="415" class="layer">第二层：配置、模型与多模态推理</text>
+  <rect x="145" y="505" width="250" height="110" class="box"/>
+  <text x="170" y="542" class="h">配置加载</text>
+  <text x="170" y="571" class="p">Pathlib 路径构建</text>
+  <text x="170" y="595" class="p">按键合并默认配置</text>
+
+  <rect x="435" y="505" width="250" height="110" class="box"/>
+  <text x="460" y="542" class="h">模型加载</text>
+  <text x="460" y="571" class="p">兼容 model / ema / Module</text>
+  <text x="460" y="595" class="p">推理前统一 eval()</text>
+
+  <rect x="725" y="505" width="250" height="110" class="box"/>
+  <text x="750" y="542" class="h">YOLO 规划与可视化</text>
+  <text x="750" y="571" class="p">AEB 输入校验</text>
+  <text x="750" y="595" class="p">检测框与标签边界裁剪</text>
+
+  <path d="M345 285 L435 285" class="arrow"/>
+  <path d="M685 285 L775 285" class="arrow"/>
+  <path d="M900 340 C900 410 855 450 810 505" class="dash"/>
+  <path d="M560 340 L560 505" class="dash"/>
+  <path d="M270 340 C270 405 285 450 305 505" class="dash"/>
+</svg>

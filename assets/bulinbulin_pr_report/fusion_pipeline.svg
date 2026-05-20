@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#31516a"/>
+    </marker>
+    <style>
+      .title{font:700 30px "Microsoft YaHei", Arial, sans-serif;fill:#17324d}
+      .box{rx:16;fill:#fff;stroke:#d4e0ea;stroke-width:1.5}
+      .rgb{fill:#dbeafe;stroke:#93c5fd}
+      .lidar{fill:#dcfce7;stroke:#86efac}
+      .fusion{fill:#fff7ed;stroke:#fdba74}
+      .h{font:700 19px "Microsoft YaHei", Arial, sans-serif;fill:#17324d}
+      .p{font:400 15px "Microsoft YaHei", Arial, sans-serif;fill:#516174}
+      .arrow{stroke:#31516a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+      .dim{font:700 16px "Microsoft YaHei", Arial, sans-serif;fill:#0f766e}
+    </style>
+  </defs>
+  <rect width="1100" height="560" fill="#f8fbff"/>
+  <text x="50" y="58" class="title">多模态异常检测：特征维度对齐与融合</text>
+
+  <rect x="70" y="120" width="210" height="110" class="box rgb"/>
+  <text x="100" y="160" class="h">RGB 图像分支</text>
+  <text x="100" y="190" class="p">视觉纹理、颜色、目标外观</text>
+  <text x="100" y="214" class="dim">原特征：2048 维</text>
+
+  <rect x="70" y="330" width="210" height="110" class="box lidar"/>
+  <text x="100" y="370" class="h">LiDAR 点云分支</text>
+  <text x="100" y="400" class="p">空间距离、结构、轮廓</text>
+  <text x="100" y="424" class="dim">原特征：1024 维</text>
+
+  <rect x="390" y="120" width="210" height="110" class="box"/>
+  <text x="420" y="160" class="h">RGB 投影层</text>
+  <text x="420" y="190" class="p">Linear / Conv 映射</text>
+  <text x="420" y="214" class="dim">输出：512 维</text>
+
+  <rect x="390" y="330" width="210" height="110" class="box"/>
+  <text x="420" y="370" class="h">LiDAR 投影层</text>
+  <text x="420" y="400" class="p">统一特征空间</text>
+  <text x="420" y="424" class="dim">输出：512 维</text>
+
+  <rect x="700" y="225" width="230" height="130" class="box fusion"/>
+  <text x="732" y="265" class="h">融合策略</text>
+  <text x="732" y="296" class="p">weighted / concat / attention</text>
+  <text x="732" y="326" class="p">共享一致维度，降低维护成本</text>
+
+  <rect x="940" y="225" width="120" height="130" class="box"/>
+  <text x="962" y="268" class="h">异常分类</text>
+  <text x="962" y="299" class="p">类型兜底</text>
+  <text x="962" y="323" class="p">device 统一</text>
+
+  <path d="M280 175 L390 175" class="arrow"/>
+  <path d="M280 385 L390 385" class="arrow"/>
+  <path d="M600 175 C650 175 660 245 700 260" class="arrow"/>
+  <path d="M600 385 C650 385 660 335 700 320" class="arrow"/>
+  <path d="M930 290 L940 290" class="arrow"/>
+</svg>

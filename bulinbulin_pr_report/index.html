@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://bulinbulin163.github.io/nn/bulinbulin_pr_report/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>bulinbulin163 贡献报告 - 神经网络</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "bulinbulin163 \u8d21\u732e\u62a5\u544a";
+        var mkdocs_page_input_path = "bulinbulin_pr_report.md";
+        var mkdocs_page_url = "/nn/bulinbulin_pr_report/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> 神经网络
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">首页</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">bulinbulin163 贡献报告</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">摘要</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. 项目背景与立项依据</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2">2. 贡献目标</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3. 总体技术架构</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-carla">4. 重点项目一：CARLA 多传感器平台稳健性优化</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41">4.1 项目概述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42-actor">4.2 Actor 生成逻辑优化</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43">4.3 数据录制与异步写盘收尾</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#44">4.4 终端日志与车辆统计优化</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#45">4.5 小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-carla">5. 重点项目二：CARLA 自动驾驶视觉导航模块优化</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51">5.1 项目概述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52">5.2 配置加载：从全局覆盖到按键合并</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53-checkpoint">5.3 模型加载：兼容不同 checkpoint 结构</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#54-rgb-lidar">5.4 多模态融合：统一 RGB 与 LiDAR 特征空间</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#55">5.5 小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-carla-yolo">6. 重点项目三：CARLA YOLO 规划器边界场景增强</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61">6.1 项目概述</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62-tensorboard">6.2 TensorBoard 日志写入优化</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63-aeb">6.3 AEB 规划器输入校验</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#64">6.4 可视化绘制边界处理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#65">6.5 小结</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-airsim">7. 其他贡献：基础模型与 AirSim 安全导航</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71-cnn-pr-5187">7.1 CNN 高级正则化技术（PR #5187）</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72-airsim-pr-5649">7.2 AirSim 安全导航入口修复（PR #5649）</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-pr">8. PR 提交记录</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9">9. 测试与验证</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10">10. 工作总结</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#11">11. 后续优化方向</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">参考资料</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">神经网络</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">bulinbulin163 贡献报告</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/bulinbulin163/nn/edit/main/docs/bulinbulin_pr_report.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="openhutbnn-11-pr">OpenHUTB/nn 开源贡献报告：面向仿真智能系统的 11 次 PR 实践</h1>
+<h2 id="_1">摘要</h2>
+<p>本文档记录了 <code>bulinbulin163</code> 在 <code>OpenHUTB/nn</code> 仓库中的 11 次已合并 Pull Request。与单点功能开发不同，本次贡献更偏向对既有仿真智能系统进行工程化加固：围绕 CARLA、AirSim、YOLO 规划器、多模态检测器和基础 CNN 训练脚本，持续修复路径、配置、模型加载、异步写盘、日志记录、输入校验和可视化边界处理等问题。</p>
+<p>本轮贡献累计修改 11 个文件，新增 344 行、删除 137 行。整体目标可以概括为一句话：让仓库中的自动驾驶、无人机与神经网络示例在异常配置、脏输入、跨平台路径和仿真资源收尾场景下更稳定、更容易复现，也更适合后续同学继续扩展。</p>
+<div align="center">
+  <img src="assets/bulinbulin_pr_report/contribution_overview.svg" alt="贡献总览图" width="880" />
+  <p>图 1：11 次 PR 覆盖的五类模块与三条重点项目线</p>
+</div>
+
+<hr />
+<h2 id="1">1. 项目背景与立项依据</h2>
+<p><code>OpenHUTB/nn</code> 是面向神经网络教学、仿真实验和智能系统实践的开源仓库，覆盖基础神经网络、CARLA 自动驾驶、AirSim 无人机控制、MuJoCo 机器人仿真等方向。仓库内容丰富，但也意味着不同模块之间依赖复杂：有的模块依赖仿真器，有的模块依赖深度学习框架，有的模块需要实时处理传感器数据，还有的模块需要写入日志、保存图像或加载 checkpoint。</p>
+<p>在这种工程场景中，真正影响使用体验的往往不是“大算法”，而是一些容易被忽略的细节：</p>
+<ul>
+<li>路径是否跨平台；</li>
+<li>YAML 为空时是否能正常加载；</li>
+<li><code>torch.load()</code> 返回不同格式时是否能解析；</li>
+<li>CARLA actor 生成失败时是否能安全退出；</li>
+<li>图像保存失败是否会被发现；</li>
+<li>检测框字段缺失或越界时，规划器和可视化模块是否会崩溃；</li>
+<li>日志 writer 关闭后是否还会静默写入失败。</li>
+</ul>
+<p>因此，本次贡献的核心定位是：<strong>面向仿真智能系统的工程稳健性优化</strong>。</p>
+<hr />
+<h2 id="2">2. 贡献目标</h2>
+<p>本次开源实践主要围绕以下目标展开：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>说明</th>
+<th>对应模块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>提升基础模型泛化能力</td>
+<td>为 CNN 训练流程补充 L2 正则化，降低过拟合风险</td>
+<td><code>chap05_CNN</code></td>
+</tr>
+<tr>
+<td>修复无人机安全导航入口</td>
+<td>恢复 AirSim 摄像头图像获取与障碍物检测流程</td>
+<td><code>safe_navigation</code></td>
+</tr>
+<tr>
+<td>增强 CARLA 场景运行稳定性</td>
+<td>优化 actor 生成、录制收尾、日志统计</td>
+<td><code>carla_multisensor_platform</code></td>
+</tr>
+<tr>
+<td>增强自动驾驶视觉导航鲁棒性</td>
+<td>改进配置加载、模型权重解析、多模态融合</td>
+<td><code>carla_auto_vision_navigator</code></td>
+</tr>
+<tr>
+<td>增强 YOLO 规划器边界处理</td>
+<td>对日志、AEB 规划和可视化绘制增加异常输入兜底</td>
+<td><code>carla_yolo_planner</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3">3. 总体技术架构</h2>
+<p>从系统角度看，这 11 个 PR 可以分成三层：底层是基础训练与仿真入口，中层是 CARLA 场景、数据、模型和日志工具，上层是 YOLO 规划器与可视化输出。</p>
+<div align="center">
+  <img src="assets/bulinbulin_pr_report/system_architecture.svg" alt="系统技术架构图" width="900" />
+  <p>图 2：从仿真输入到模型推理、规划决策和可视化输出的工程链路</p>
+</div>
+
+<p>这条链路中的关键思想是：<strong>不要假设输入永远干净，也不要假设环境永远完整</strong>。因此，多个 PR 都采用了相似的优化策略：</p>
+<ul>
+<li>对路径使用 <code>pathlib.Path</code> 统一管理；</li>
+<li>对配置值设置合理边界；</li>
+<li>对空配置、缺失字段、非法检测框做跳过或兜底；</li>
+<li>对异步写盘和日志关闭流程增加明确状态；</li>
+<li>对模型加载增加 checkpoint 结构兼容；</li>
+<li>对跨设备推理统一迁移到目标 device。</li>
+</ul>
+<hr />
+<h2 id="4-carla">4. 重点项目一：CARLA 多传感器平台稳健性优化</h2>
+<h3 id="41">4.1 项目概述</h3>
+<p>CARLA 多传感器平台负责构建自动驾驶仿真场景，涉及行人、车辆等 actor 的生成，也涉及图像、元数据和日志的录制保存。该模块处在仿真系统的底座位置，一旦 actor 生成失败、数据保存遗漏或日志统计异常，上层感知与规划模块都会受到影响。</p>
+<p>本项目线包含 3 个 PR：</p>
+<ul>
+<li><a href="https://github.com/OpenHUTB/nn/pull/5788">#5788</a>：优化 <code>environment.py</code> 的 actor 生成逻辑；</li>
+<li><a href="https://github.com/OpenHUTB/nn/pull/5842">#5842</a>：优化 <code>DataRecorder.py</code> 的录制收尾与路径管理；</li>
+<li><a href="https://github.com/OpenHUTB/nn/pull/5844">#5844</a>：优化 <code>logger.py</code> 的车辆统计与终端输出。</li>
+</ul>
+<h3 id="42-actor">4.2 Actor 生成逻辑优化</h3>
+<p>在 CARLA 场景中，行人和车辆并不一定总能按预期生成。出生点不足、导航点无效、生成碰撞、controller 绑定范围过大，都会造成场景初始化阶段的不稳定。PR #5788 针对这些问题进行了修复。</p>
+<table>
+<thead>
+<tr>
+<th>问题场景</th>
+<th>原风险</th>
+<th>优化方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行人出生点不足</td>
+<td>空列表或数量不匹配导致异常</td>
+<td>仅基于有效导航点生成行人</td>
+</tr>
+<tr>
+<td>行人生成失败</td>
+<td>后续 controller 绑定错位</td>
+<td>只为本次成功生成的行人创建 AI controller</td>
+</tr>
+<tr>
+<td>车辆出生点重复</td>
+<td>重复抽到同一位置导致生成失败</td>
+<td>先打乱出生点，再按目标数量截取</td>
+</tr>
+<tr>
+<td>无有效生成结果</td>
+<td>后续流程继续处理空数据</td>
+<td>直接安全返回</td>
+</tr>
+</tbody>
+</table>
+<p>这类修改看起来不大，但对仿真项目很关键。它让场景初始化从“理想条件下能跑”变成“资源不足或部分失败时也能稳定退化”。</p>
+<h3 id="43">4.3 数据录制与异步写盘收尾</h3>
+<p>PR #5842 重点处理 <code>DataRecorder.py</code> 中的数据保存问题。数据录制模块一般运行在主仿真循环旁边，如果停止录制时后台队列还没写完，就可能出现最后几帧丢失；如果 <code>cv2.imwrite()</code> 失败但没有检查返回值，就会造成“看起来保存成功，实际文件不存在”的静默失败。</p>
+<p>核心改进如下：</p>
+<ul>
+<li>使用 <code>pathlib.Path</code> 管理输出目录、图片目录、元数据目录和会话目录；</li>
+<li>JSON 写入统一指定 UTF-8 编码；</li>
+<li>停止录制时先等待保存队列处理完成，再结束后台线程；</li>
+<li>检查 <code>cv2.imwrite()</code> 的返回值，图像保存失败时记录错误日志；</li>
+<li>对 <code>vehicle_transform</code> 使用深拷贝，避免异步线程拿到被后续更新覆盖的数据。</li>
+</ul>
+<h3 id="44">4.4 终端日志与车辆统计优化</h3>
+<p>PR #5844 优化了车辆统计和终端日志展示。主要改动包括：</p>
+<ul>
+<li>使用平方距离比较替代循环中的开方计算；</li>
+<li>修复 <code>Vehicles nearby</code> 在边界情况下可能显示为负数的问题；</li>
+<li>对 ANSI 彩色转义序列计算可见长度，避免彩色终端输出错位；</li>
+<li>清理未使用导入，让日志模块更聚焦。</li>
+</ul>
+<h3 id="45">4.5 小结</h3>
+<p>这一组 PR 的价值在于提升 CARLA 仿真底座的可靠性：actor 生成更稳，数据保存更可靠，日志展示更清楚。它们不直接改变算法效果，但能显著降低后续调试成本。</p>
+<hr />
+<h2 id="5-carla">5. 重点项目二：CARLA 自动驾驶视觉导航模块优化</h2>
+<h3 id="51">5.1 项目概述</h3>
+<p><code>carla_auto_vision_navigator</code> 面向自动驾驶视觉导航场景，包含配置加载、模型加载、多模态异常检测等逻辑。该模块的典型难点是：配置项较多、模型 checkpoint 格式不统一、RGB 与 LiDAR 特征维度不一致、CPU/GPU 设备可能混用。</p>
+<p>本项目线包含 3 个 PR：</p>
+<ul>
+<li><a href="https://github.com/OpenHUTB/nn/pull/5845">#5845</a>：优化 <code>config.py</code> 的配置加载与路径处理；</li>
+<li><a href="https://github.com/OpenHUTB/nn/pull/5846">#5846</a>：优化 <code>model_loader.py</code> 的模型加载稳健性；</li>
+<li><a href="https://github.com/OpenHUTB/nn/pull/5847">#5847</a>：优化 <code>object_detector.py</code> 的融合与配置兜底。</li>
+</ul>
+<h3 id="52">5.2 配置加载：从全局覆盖到按键合并</h3>
+<p>PR #5845 解决的是配置初始化阶段的稳定性问题。原始配置逻辑直接使用 <code>globals().update(...)</code> 合并自定义配置，这种方式虽然简单，但会带来一个风险：用户只想覆盖字典中的一个字段，却可能把整个默认配置覆盖掉。</p>
+<p>优化后的思路是：</p>
+<ul>
+<li>使用 <code>pathlib.Path</code> 构建项目根目录和模型路径；</li>
+<li>YAML 文件读取显式使用 UTF-8；</li>
+<li>空 YAML 文件返回空配置而不是触发异常；</li>
+<li>字典配置采用按键合并，只覆盖用户显式提供的字段；</li>
+<li>补充 <code>torch</code> 导入，避免 <code>device</code> 初始化阶段缺少依赖。</li>
+</ul>
+<h3 id="53-checkpoint">5.3 模型加载：兼容不同 checkpoint 结构</h3>
+<p>PR #5846 重点增强模型加载器。实际项目中，<code>torch.load()</code> 的返回结果可能有多种形式：</p>
+<ul>
+<li>直接保存的 <code>torch.nn.Module</code>；</li>
+<li>包含 <code>model</code> 键的 checkpoint；</li>
+<li>包含 <code>ema</code> 键的 checkpoint；</li>
+<li>仅包含参数字典的结构。</li>
+</ul>
+<p>为降低推理前的静态风险，该 PR 增加了 checkpoint 解析逻辑，并将默认兜底模型改为基于 <code>AdaptiveAvgPool2d</code> 的分辨率无关结构。这样即使输入图像尺寸变化，也不会强依赖固定展平维度。</p>
+<h3 id="54-rgb-lidar">5.4 多模态融合：统一 RGB 与 LiDAR 特征空间</h3>
+<p>PR #5847 是这一组中最接近“模型结构”的改动。原融合逻辑中，RGB 特征为 2048 维，LiDAR 特征为 1024 维，默认 <code>weighted</code> 融合方式无法直接相加。该 PR 为两路特征增加投影层，统一映射到 512 维，再进行融合。</p>
+<div align="center">
+  <img src="assets/bulinbulin_pr_report/fusion_pipeline.svg" alt="多模态融合流程图" width="880" />
+  <p>图 3：RGB 与 LiDAR 特征对齐后的多模态异常检测流程</p>
+</div>
+
+<p>核心改进包括：</p>
+<ul>
+<li>RGB 特征与 LiDAR 特征分别通过投影层映射到 512 维；</li>
+<li><code>weighted</code>、<code>concat</code>、<code>attention</code> 三种分支共用更一致的特征空间；</li>
+<li>当配置中缺少 <code>anomaly_types</code> 时，从 <code>UNSTRUCTURED_SCENES</code> 汇总异常类型；</li>
+<li>初始化末尾统一调用 <code>self.to(self.device)</code>，减少 CPU/GPU 混放风险。</li>
+</ul>
+<h3 id="55">5.5 小结</h3>
+<p>这一组 PR 的重点是让自动驾驶视觉导航模块更像一个可复用组件：配置更安全，模型加载更兼容，多模态融合更合理，设备管理更明确。</p>
+<hr />
+<h2 id="6-carla-yolo">6. 重点项目三：CARLA YOLO 规划器边界场景增强</h2>
+<h3 id="61">6.1 项目概述</h3>
+<p><code>carla_yolo_planner</code> 更靠近系统上层，主要处理目标检测结果、自动紧急制动规划、TensorBoard 日志和画面可视化。相比配置和模型加载，这里更容易遇到“运行时脏数据”：检测结果为空、检测框字段不足、类别 ID 越界、图像尺寸配置异常、安全区比例越界等。</p>
+<p>本项目线包含 3 个 PR：</p>
+<ul>
+<li><a href="https://github.com/OpenHUTB/nn/pull/5848">#5848</a>：优化 TensorBoard 日志写入稳健性；</li>
+<li><a href="https://github.com/OpenHUTB/nn/pull/5849">#5849</a>：优化 AEB 规划器输入与配置边界处理；</li>
+<li><a href="https://github.com/OpenHUTB/nn/pull/5851">#5851</a>：优化可视化绘制边界处理。</li>
+</ul>
+<h3 id="62-tensorboard">6.2 TensorBoard 日志写入优化</h3>
+<p>PR #5848 对日志工具做了几个关键修补：</p>
+<ul>
+<li>日志目录统一使用 <code>pathlib.Path</code>；</li>
+<li><code>fps</code>、<code>detection_count</code>、<code>avg_confidence</code> 在写入前做显式规范化；</li>
+<li>即使当前帧没有检测目标，也写入平均置信度，避免 TensorBoard 曲线断点；</li>
+<li>writer 关闭后继续写入会显式抛错，避免静默失败；</li>
+<li>关闭前调用 <code>flush()</code>，提高日志落盘完整性。</li>
+</ul>
+<h3 id="63-aeb">6.3 AEB 规划器输入校验</h3>
+<p>PR #5849 面向自动紧急制动规划器增加输入防护。AEB 逻辑依赖相机尺寸、安全区比例和检测框面积，如果配置异常或检测框字段不合法，就可能造成错误判定。</p>
+<p>优化内容包括：</p>
+<ul>
+<li><code>CAMERA_WIDTH</code> 和 <code>CAMERA_HEIGHT</code> 增加最小值保护；</li>
+<li><code>SAFE_ZONE_RATIO</code> 和 <code>COLLISION_AREA_THRES</code> 收敛到 <code>0.0 ~ 1.0</code>；</li>
+<li>检测结果为 <code>None</code>、字段数量不足、数值无法转换或宽高非正数时直接跳过；</li>
+<li>清理未使用的 <code>numpy</code> 导入。</li>
+</ul>
+<h3 id="64">6.4 可视化绘制边界处理</h3>
+<p>PR #5851 解决的是可视化阶段的边界问题。可视化模块虽然不直接参与规划，但如果绘制阶段因为单条异常检测框报错，整个运行链路仍然会中断。</p>
+<table>
+<thead>
+<tr>
+<th>输入问题</th>
+<th>风险</th>
+<th>处理方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>安全区比例越界</td>
+<td>安全区线画到图像范围外</td>
+<td>收敛到 <code>0.0 ~ 1.0</code></td>
+</tr>
+<tr>
+<td>检测项为空</td>
+<td>解包或类型转换失败</td>
+<td>跳过该检测项</td>
+</tr>
+<tr>
+<td>检测框宽高非正</td>
+<td>绘制无效矩形</td>
+<td>跳过该检测项</td>
+</tr>
+<tr>
+<td><code>class_id</code> 越界</td>
+<td>类别列表索引异常</td>
+<td>退化为默认标签</td>
+</tr>
+<tr>
+<td>标签文字超出图像边界</td>
+<td>绘制位置异常</td>
+<td>统一裁剪坐标</td>
+</tr>
+</tbody>
+</table>
+<h3 id="65">6.5 小结</h3>
+<p>这一组 PR 的核心价值是“让规划器和可视化层不被脏数据击穿”。在真实检测系统中，模型输出并不总是干净的，边界处理越扎实，系统越适合长时间运行。</p>
+<hr />
+<h2 id="7-airsim">7. 其他贡献：基础模型与 AirSim 安全导航</h2>
+<h3 id="71-cnn-pr-5187">7.1 CNN 高级正则化技术（PR #5187）</h3>
+<p>PR #5187 修改 <code>src/chap05_CNN/CNN_pytorch.py</code>，在训练函数的优化器初始化中加入 <code>weight_decay=1e-4</code>，为 CNN 模型补充 L2 正则化能力。该改动与已有 Batch Normalization 结构配合，有助于降低过拟合风险并提升训练稳定性。</p>
+<h3 id="72-airsim-pr-5649">7.2 AirSim 安全导航入口修复（PR #5649）</h3>
+<p>PR #5649 修改 <code>src/safe_navigation/run_main.py</code>，修复摄像头检测流程中的语法问题，并补全图像获取与障碍物检测调用：</p>
+<ul>
+<li>删除导致 Python 解析失败的非法字符；</li>
+<li>在获取摄像头信息后调用 <code>get_camera_image(client)</code>；</li>
+<li>图像获取成功时调用 <code>detect_obstacles(img)</code>；</li>
+<li>图像获取失败时保留模拟图像兜底逻辑；</li>
+<li>使用 <code>compile()</code> 完成静态语法检查。</li>
+</ul>
+<hr />
+<h2 id="8-pr">8. PR 提交记录</h2>
+<table>
+<thead>
+<tr>
+<th>PR</th>
+<th>修改文件</th>
+<th>新增/删除</th>
+<th>项目线</th>
+<th>主题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5187">#5187</a></td>
+<td><code>src/chap05_CNN/CNN_pytorch.py</code></td>
+<td>+2 / -2</td>
+<td>基础模型</td>
+<td>高级正则化技术</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5649">#5649</a></td>
+<td><code>src/safe_navigation/run_main.py</code></td>
+<td>+9 / -4</td>
+<td>AirSim</td>
+<td>完善安全导航主流程</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5788">#5788</a></td>
+<td><code>src/carla_multisensor_platform/utils/environment.py</code></td>
+<td>+37 / -25</td>
+<td>CARLA 平台</td>
+<td>优化 actor 生成逻辑</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5842">#5842</a></td>
+<td><code>src/carla_multisensor_platform/utils/DataRecorder.py</code></td>
+<td>+34 / -27</td>
+<td>CARLA 平台</td>
+<td>优化录制收尾与路径管理</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5844">#5844</a></td>
+<td><code>src/carla_multisensor_platform/utils/logger.py</code></td>
+<td>+32 / -11</td>
+<td>CARLA 平台</td>
+<td>优化车辆统计与终端输出</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5845">#5845</a></td>
+<td><code>src/carla_auto_vision_navigator/config.py</code></td>
+<td>+23 / -9</td>
+<td>视觉导航</td>
+<td>优化配置加载与路径处理</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5846">#5846</a></td>
+<td><code>src/carla_auto_vision_navigator/utils/model_loader.py</code></td>
+<td>+33 / -11</td>
+<td>视觉导航</td>
+<td>优化模型加载稳健性</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5847">#5847</a></td>
+<td><code>src/carla_auto_vision_navigator/src/object_detector.py</code></td>
+<td>+42 / -16</td>
+<td>视觉导航</td>
+<td>优化融合与配置兜底</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5848">#5848</a></td>
+<td><code>src/carla_yolo_planner/utils/logger.py</code></td>
+<td>+23 / -12</td>
+<td>YOLO 规划器</td>
+<td>优化日志写入稳健性</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5849">#5849</a></td>
+<td><code>src/carla_yolo_planner/utils/planner.py</code></td>
+<td>+33 / -8</td>
+<td>YOLO 规划器</td>
+<td>优化输入与配置边界处理</td>
+</tr>
+<tr>
+<td><a href="https://github.com/OpenHUTB/nn/pull/5851">#5851</a></td>
+<td><code>src/carla_yolo_planner/utils/visualization.py</code></td>
+<td>+76 / -12</td>
+<td>YOLO 规划器</td>
+<td>优化可视化绘制边界处理</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9">9. 测试与验证</h2>
+<p>本轮贡献以工程稳健性修复和静态逻辑优化为主，验证方式包括：</p>
+<ul>
+<li>在 Windows 11 环境下完成修改和 diff 复核；</li>
+<li>对 AirSim 安全导航脚本使用 <code>compile()</code> 进行 Python 语法静态检查；</li>
+<li>对路径、配置、日志、检测输入等边界场景进行代码级兜底设计；</li>
+<li>对未配置完整 CARLA 或 AirSim 仿真环境的模块，保留静态优化说明，不夸大运行验证范围。</li>
+</ul>
+<p>需要说明的是，CARLA 和 AirSim 的完整运行依赖较重，部分 PR 没有执行完整仿真场景测试。本次贡献的重点是让代码在“异常输入”和“资源收尾”场景下更可靠，为后续运行测试和功能扩展打基础。</p>
+<hr />
+<h2 id="10">10. 工作总结</h2>
+<p>本次 11 个 PR 的共同特点是：围绕系统真实使用中的脆弱点进行小步、聚焦、可合并的改进。它们没有引入大规模重构，却在多个关键位置补上了工程防护：</p>
+<ul>
+<li>训练侧：通过 L2 正则化增强基础 CNN 泛化能力；</li>
+<li>仿真入口侧：修复 AirSim 主流程语法和检测入口；</li>
+<li>CARLA 场景侧：提升 actor 生成、数据录制和日志统计稳定性；</li>
+<li>模型侧：增强配置合并、checkpoint 加载和多模态融合兼容性；</li>
+<li>规划与可视化侧：增强脏检测数据、异常配置和越界绘制的处理能力。</li>
+</ul>
+<p>从开源协作角度看，本次实践也走通了“发现问题 - 分支修改 - PR 描述 - 静态验证 - 合并入库”的完整流程。每个 PR 聚焦一个文件或一个小模块，便于评审，也降低了对主仓库的影响范围。</p>
+<hr />
+<h2 id="11">11. 后续优化方向</h2>
+<p>后续可以基于本次贡献继续推进以下工作：</p>
+<ol>
+<li>为 CARLA 多传感器平台补充最小可运行 demo，验证 actor 生成、录制保存和日志统计的完整链路；</li>
+<li>为 <code>DataRecorder</code>、<code>model_loader</code>、<code>planner</code> 和 <code>visualization</code> 增加单元测试，覆盖空输入、非法检测框、路径不存在、writer 重复关闭等场景；</li>
+<li>在完整 CARLA 环境下验证 <code>object_detector.py</code> 的 RGB/LiDAR 融合维度对齐效果；</li>
+<li>将路径处理、配置合并、日志关闭等通用模式沉淀为项目工具函数；</li>
+<li>对 YOLO 规划器增加仿真回放数据，评估 AEB 决策在不同检测框质量下的稳定性。</li>
+</ol>
+<hr />
+<h2 id="_2">参考资料</h2>
+<ul>
+<li><a href="https://github.com/OpenHUTB/nn">OpenHUTB/nn 仓库</a></li>
+<li><a href="https://github.com/OpenHUTB/nn/pulls?q=is%3Apr+is%3Amerged+author%3Abulinbulin163">bulinbulin163 已合并 PR 查询</a></li>
+<li><a href="https://charon191910.github.io/nn_fork/">charon191910 课程报告参考页</a></li>
+<li><a href="https://semhaq.github.io/nn/semhaq_course_report/">semhaq 课程报告参考页</a></li>
+<li><a href="https://openhutb.github.io/nn/humanoid_balance/Humanoid_Balance/">Humanoid Balance 参考页</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="首页"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>OpenHUTB 版权所有 &copy; 2026</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/bulinbulin163/nn" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../extra.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
