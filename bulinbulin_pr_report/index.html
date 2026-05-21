@@ -223,11 +223,6 @@
 <li><a href="https://github.com/OpenHUTB/nn/pull/5842">#5842</a>：优化 <code>DataRecorder.py</code> 的录制收尾与路径管理；</li>
 <li><a href="https://github.com/OpenHUTB/nn/pull/5844">#5844</a>：优化 <code>logger.py</code> 的车辆统计与终端输出。</li>
 </ul>
-<div align="center">
-  <img src="../assets/bulinbulin_pr_report/carla_platform_stability.gif" alt="CARLA 多传感器平台稳健性优化示意动图" width="880" />
-  <p>图 2：CARLA 平台 actor 生成、录制队列收尾与日志统计优化示意动图</p>
-</div>
-
 <h3 id="42-actor">4.2 Actor 生成逻辑优化</h3>
 <p>在 CARLA 场景中，行人和车辆并不一定总能按预期生成。出生点不足、导航点无效、生成碰撞、controller 绑定范围过大，都会造成场景初始化阶段的不稳定。PR #5788 针对这些问题进行了修复。</p>
 <table>
@@ -292,11 +287,6 @@
 <li><a href="https://github.com/OpenHUTB/nn/pull/5846">#5846</a>：优化 <code>model_loader.py</code> 的模型加载稳健性；</li>
 <li><a href="https://github.com/OpenHUTB/nn/pull/5847">#5847</a>：优化 <code>object_detector.py</code> 的融合与配置兜底。</li>
 </ul>
-<div align="center">
-  <img src="../assets/bulinbulin_pr_report/multimodal_fusion_guard.gif" alt="CARLA 视觉导航多模态融合示意动图" width="880" />
-  <p>图 3：配置加载、模型加载与 RGB/LiDAR 特征对齐融合示意动图</p>
-</div>
-
 <h3 id="52">5.2 配置加载：从全局覆盖到按键合并</h3>
 <p>PR #5845 解决的是配置初始化阶段的稳定性问题。原始配置逻辑直接使用 <code>globals().update(...)</code> 合并自定义配置，这种方式虽然简单，但会带来一个风险：用户只想覆盖字典中的一个字段，却可能把整个默认配置覆盖掉。</p>
 <p>优化后的思路是：</p>
@@ -342,11 +332,6 @@
 <li><a href="https://github.com/OpenHUTB/nn/pull/5849">#5849</a>：优化 AEB 规划器输入与配置边界处理；</li>
 <li><a href="https://github.com/OpenHUTB/nn/pull/5851">#5851</a>：优化可视化绘制边界处理。</li>
 </ul>
-<div align="center">
-  <img src="../assets/bulinbulin_pr_report/yolo_planner_guard.gif" alt="CARLA YOLO 规划器边界处理示意动图" width="880" />
-  <p>图 5：YOLO 规划器检测输入过滤、AEB 判断与可视化裁剪示意动图</p>
-</div>
-
 <h3 id="62-tensorboard">6.2 TensorBoard 日志写入优化</h3>
 <p>PR #5848 对日志工具做了几个关键修补：</p>
 <ul>
